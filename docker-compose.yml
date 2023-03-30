@@ -1,0 +1,35 @@
+version: '3'
+
+networks:
+  raj_snn_main:
+
+
+services:
+
+  mysql:
+    image: mariadb:10.5.8
+    container_name: raj_snn_mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "4306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    env_file:
+      - .env
+    networks:
+      - raj_snn_main
+
+  phpmyadmin:
+    container_name: raj_snn_admin
+    depends_on:
+      - mysql
+    # image: phpmyadmin/phpmyadmin
+    image: arm64v8/phpmyadmin
+    restart: always
+    ports:
+      - '8086:80'
+    env_file:
+      - .env
+    networks:
+      - raj_snn_main
