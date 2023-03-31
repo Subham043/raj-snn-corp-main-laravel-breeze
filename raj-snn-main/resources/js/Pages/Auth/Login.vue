@@ -1,11 +1,12 @@
 <script setup>
-import Checkbox from '@/Components/Checkbox.vue';
+import Checkbox from '@/Components/Form/Checkbox.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import InputError from '@/Components/Form/InputError.vue';
+import InputLabel from '@/Components/Form/InputLabel.vue';
+import PrimaryButton from '@/Components/Form/PrimaryButton.vue';
+import TextInput from '@/Components/Form/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import AuthHeader from '@/Components/AuthHeader.vue';
 
 defineProps({
     canResetPassword: {
@@ -41,13 +42,10 @@ const submit = () => {
             <div class="card mt-4">
 
                 <div class="card-body p-4">
-                    <div class="text-center mt-2">
-                        <h5 class="text-primary">Welcome Back !</h5>
-                        <p class="text-muted">Sign in to continue to SNN RAJ CORP Admin Panel.</p>
-                        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-                            {{ status }}
-                        </div>
-                    </div>
+                    <AuthHeader
+                        heading="Welcome Back !"
+                        sub_heading="Sign in to continue to SNN RAJ CORP Admin Panel."
+                    />
                     <div class="p-2 mt-4">
                         <form @submit.prevent="submit">
                             <div class="mb-3">
@@ -80,7 +78,7 @@ const submit = () => {
                             </div>
 
                             <div class="mt-4">
-                                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                     Log in
                                 </PrimaryButton>
                             </div>

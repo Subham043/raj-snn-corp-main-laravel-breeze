@@ -1,10 +1,11 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import InputError from '@/Components/Form/InputError.vue';
+import InputLabel from '@/Components/Form/InputLabel.vue';
+import PrimaryButton from '@/Components/Form/PrimaryButton.vue';
+import TextInput from '@/Components/Form/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
+import AuthHeader from '@/Components/AuthHeader.vue';
 
 const props = defineProps({
     email: {
@@ -42,10 +43,10 @@ const submit = () => {
             <div class="card mt-4">
 
                 <div class="card-body p-4">
-                    <div class="text-center mt-2">
-                        <h5 class="text-primary">Reset Password !</h5>
-                        <p class="text-muted">Enter the following details to reset password.</p>
-                    </div>
+                    <AuthHeader
+                        heading="Reset Password !"
+                        sub_heading="Enter the following details to reset password."
+                    />
                     <div class="p-2 mt-4">
                         <form @submit.prevent="submit">
 

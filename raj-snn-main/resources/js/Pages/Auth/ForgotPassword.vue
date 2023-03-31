@@ -1,10 +1,11 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import InputError from '@/Components/Form/InputError.vue';
+import InputLabel from '@/Components/Form/InputLabel.vue';
+import PrimaryButton from '@/Components/Form/PrimaryButton.vue';
+import TextInput from '@/Components/Form/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import AuthHeader from '@/Components/AuthHeader.vue';
 
 defineProps({
     status: {
@@ -32,14 +33,11 @@ const submit = () => {
             <div class="card mt-4">
 
                 <div class="card-body p-4">
-                    <div class="text-center mt-2">
-                        <h5 class="text-primary">Forgot Password?</h5>
-                        <p class="text-muted">Reset password with SNN RAJ CORP</p>
-                        <div v-if="status">
-                            {{ status }}
-                        </div>
-
-                    </div>
+                    <AuthHeader
+                        heading="Forgot Password?"
+                        sub_heading="Reset password with SNN RAJ CORP"
+                        :status="status"
+                    />
 
                     <div class="alert alert-borderless alert-warning text-center mb-2 mx-2" role="alert">
                         Just let us know your email address and we will email you a password reset

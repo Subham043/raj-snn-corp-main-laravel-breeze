@@ -1,16 +1,9 @@
 <script setup>
-import { ref, reactive } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
-import Header from '@/Components/Navigation/Header.vue';
-import Menu from '@/Components/Navigation/Menu.vue';
-import Footer from '@/Components/Navigation/Footer.vue';
+import { reactive } from 'vue';
+import Header from '@/Components/DashboardNavigation/Header.vue';
+import Menu from '@/Components/DashboardNavigation/Menu.vue';
+import Footer from '@/Components/DashboardNavigation/Footer.vue';
 
-const showingNavigationDropdown = ref(false);
 const state = reactive({
     openDrawer: false
 })
@@ -39,21 +32,6 @@ function drawerHandler() {
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0">Dashboard</h4>
-
-                                <div class="page-title-right">
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                                        <li class="breadcrumb-item active">Home</li>
-                                    </ol>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
                     <slot />
                 </div>
             </div>
