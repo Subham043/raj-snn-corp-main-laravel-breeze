@@ -21,7 +21,7 @@ const props = defineProps({
     <div class="text-center mt-2">
         <h5 class="text-primary">{{ heading }}</h5>
         <p class="text-muted">{{ sub_heading }}</p>
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+        <div v-if="status" class="invalid-message">
             {{ status }}
         </div>
     </div>

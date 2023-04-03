@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Modules\Authentication\Controller\AuthenticatedSessionController;
+use App\Modules\Authentication\Controller\NewPasswordController;
+use App\Modules\Authentication\Controller\PasswordController;
+use App\Modules\Authentication\Controller\PasswordResetLinkController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
