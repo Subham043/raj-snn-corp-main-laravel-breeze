@@ -63,4 +63,6 @@ import { Link, usePage } from '@inertiajs/vue3';
 import ApplicationLogo from '../ApplicationLogo.vue';
 
 const user = usePage().props.auth.user;
+
+defineEmits(['menu-click'])
 </script>

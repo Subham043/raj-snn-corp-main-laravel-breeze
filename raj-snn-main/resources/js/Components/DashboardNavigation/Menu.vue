@@ -33,9 +33,8 @@
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3';
 import ApplicationLogo from '../ApplicationLogo.vue';
 import MenuLink from '../MenuLink.vue';
 
-
+defineEmits(['menu-click'])
 </script>
