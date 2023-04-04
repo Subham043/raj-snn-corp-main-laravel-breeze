@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Modules\HomePage\Banner\Model\HomeBanner;
 use App\Modules\HomePage\Banner\Request\BannerCreateRequest;
 use App\Modules\HomePage\Banner\Request\BannerUpdateRequest;
+use App\Modules\HomePage\Banner\Resource\BannerCollection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class BannerController extends Controller
 {
@@ -38,9 +40,9 @@ class BannerController extends Controller
      */
     public function edit($id): Response
     {
-        $data = HomeBanner::findOrFail($id);
+        $banner = HomeBanner::findOrFail($id);
         return Inertia::render('HomePage/Banner/Edit', [
-            'data' => $data,
+            'banner' => BannerCollection::make($banner),
         ]);
     }
 
@@ -58,16 +60,14 @@ class BannerController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function list(): Response
+    public function list(Request $request): Response
     {
-        $data = HomeBanner::all()->map(function($d) {
-            return [
-                'id' => $d->id,
-                'title' => $d->title,
-            ];
-        });
+        $banners = QueryBuilder::for(HomeBanner::class)
+                    ->allowedFilters('title')
+                    ->get();
         return Inertia::render('HomePage/Banner/List', [
-            'data' => $data,
+            'banners' => BannerCollection::collection($banners),
+            'filters' => $request->only('filter')
         ]);
     }
 

@@ -5,14 +5,16 @@ import BreadCrumb from '@/Components/BreadCrumb.vue';
 import NoData from '@/Components/NoData.vue';
 import Pagination from '@/Components/Pagination.vue';
 import Search from '@/Components/Search.vue';
-import Form from './Partials/Form.vue';
 
 defineOptions({ layout: MainLayout })
 
 defineProps({
-    data: {
-        type: Array || null,
+    banners: {
+        type: Object || null,
     },
+    filters: {
+        type: Object || null
+    }
 });
 
 </script>
@@ -38,23 +40,23 @@ defineProps({
                                 </div>
                             </div>
                             <div class="col-sm">
-                                <Search />
+                                <Search :link="route('banner.list')" :filter="filters?.filter?.title" />
                             </div>
                         </div>
-                        <div v-if="data.length>0" class="table-responsive table-card mt-3 mb-1">
+                        <div v-if="banners.data.length>0" class="table-responsive table-card mt-3 mb-1">
 
                             <table class="table align-middle table-nowrap" id="customerTable">
                                 <thead class="table-light">
                                     <tr>
                                         <th class="sort" data-sort="customer_name">Title</th>
                                         <th class="sort" data-sort="customer_name">Image</th>
-                                        <th class="sort" data-sort="date">Created Date</th>
+                                        <th class="sort" data-sort="date">Created On</th>
                                         <th class="sort" data-sort="action">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list form-check-all">
 
-                                    <tr v-for="item in data" :key="item.id">
+                                    <tr v-for="item in banners.data" :key="item.id">
                                         <td class="customer_name">{{ item.title }}</td>
                                         <td class="customer_name">{{ item.image }}</td>
                                         <td class="date">{{ item.created_at }}</td>

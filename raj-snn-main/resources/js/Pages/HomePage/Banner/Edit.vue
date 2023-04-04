@@ -7,19 +7,19 @@ import Form from './Partials/Form.vue';
 defineOptions({ layout: MainLayout })
 
 const props = defineProps({
-    data: {
+    banner: {
         type: Object,
     },
 });
 
 const form = useForm({
-    title: props.data.title,
-    sub_title: props.data.sub_title,
+    title: props.banner.data.title,
+    sub_title: props.banner.data.sub_title,
     image: null,
 });
 
 const SubmitForm = () => {
-    form.post(route('banner.update', props.data.id), {
+    form.post(route('banner.update', props.banner.data.id), {
         preserveScroll: true,
         onSuccess: () => form.reset(),
     })
