@@ -68,7 +68,7 @@ defineProps({
                             <InputError class="mt-2" :message="form.errors.sub_title" />
                         </div>
 
-                        <div class="col-xxl-2 col-lg-2 col-md-4 col-sm-12">
+                        <div class="col-xxl-1 col-lg-1 col-md-4 col-sm-12">
                             <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
                         </div>
                         <div class="col-xxl-12 col-md-12">

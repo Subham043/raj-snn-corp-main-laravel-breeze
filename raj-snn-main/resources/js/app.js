@@ -1,6 +1,6 @@
 import './bootstrap';
 // import '../css/app.css';
-import 'wave-ui/dist/wave-ui.css'
+import 'wave-ui/dist/wave-ui.css';
 import '../css/bootstrap.min.css';
 import '../css/main.min.css';
 import '../css/icons.min.css';

@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/create', [BannerController::class, 'store'])->name('banner.store');
             Route::get('/edit/{id}', [BannerController::class, 'edit'])->name('banner.edit');
             Route::post('/edit/{id}', [BannerController::class, 'update'])->name('banner.update');
+            Route::delete('/delete/{id}', [BannerController::class, 'delete'])->name('banner.delete');
         });
     });
 });

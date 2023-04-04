@@ -1,14 +1,14 @@
 <template>
     <button
-        v-if="type"
-        class="btn btn-md btn-success add-btn" type="button"  id="create-btn" style="background:green;border-color:green;"
+        v-if="type_button"
+        :class="`btn btn-${size} btn-success add-btn`" id="create-btn" style="background:green;border-color:green;"
     >
         <slot />
     </button>
     <Link
         v-else
         :href="href"
-        class="btn btn-md btn-success add-btn" type="button"  id="create-btn" style="background:green;border-color:green;"
+        :class="`btn btn-${size} btn-success add-btn`" id="create-btn" style="background:green;border-color:green;"
     >
         <slot />
     </Link>
@@ -19,13 +19,17 @@
 import { Link } from '@inertiajs/vue3';
 
     defineProps({
-        type: {
+        type_button: {
             type: Boolean,
             default: true
         },
         href: {
             type: String,
             default: 'button'
+        },
+        size: {
+            type: String,
+            default: 'sm'
         }
     });
 

@@ -35,7 +35,7 @@ class BannerController extends Controller
 
         $request->store();
 
-        return Redirect::route('banner.create')->with('success', 'saved');
+        return Redirect::route('banner.create')->with('success', 'created');
     }
 
     /**
@@ -57,7 +57,21 @@ class BannerController extends Controller
         $data = HomeBanner::findOrFail($id);
         $request->update($data);
 
-        return Redirect::route('banner.edit', $id)->with('success', 'saved');
+        return Redirect::route('banner.edit', $id)->with('success', 'updated');
+    }
+
+     /**
+     * Delete the banner's edit form.
+     */
+    public function delete(HomeBanner $homeBanner, $id): RedirectResponse
+    {
+        $banner = HomeBanner::findOrFail($id);
+        if(file_exists(storage_path('app/public/'.$homeBanner->image_path.'/'.$banner->image))){
+            unlink(storage_path('app/public/'.$homeBanner->image_path.'/'.$banner->image));
+        }
+        $banner->delete();
+
+        return Redirect::back()->with('success', 'deleted');
     }
 
     /**

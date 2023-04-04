@@ -15,7 +15,13 @@ const form = useForm({
 const SubmitForm = () => {
     form.post(route('banner.store'), {
         preserveScroll: true,
-        onSuccess: () => form.reset(),
+        onSuccess: () => {
+            form.reset();
+            $waveui.notify({
+                message: 'Created Successfully.',
+                timeout: 3000, // ms.
+            })
+        },
     })
 }
 

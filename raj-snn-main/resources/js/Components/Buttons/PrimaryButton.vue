@@ -1,14 +1,14 @@
 <template>
     <button
-        v-if="type"
-        class="btn btn-sm btn-primary"
+        v-if="type_button"
+        :class="`btn btn-${size} btn-primary`" type="button"
     >
         <slot />
     </button>
     <Link
         v-else
         :href="href"
-        class="btn btn-sm btn-primary"
+        :class="`btn btn-${size} btn-primary`" type="button"
     >
         <slot />
     </Link>
@@ -19,13 +19,17 @@
 import { Link } from '@inertiajs/vue3';
 
     defineProps({
-        type: {
+        type_button: {
             type: Boolean,
             default: true
         },
         href: {
             type: String,
             default: 'button'
+        },
+        size: {
+            type: String,
+            default: 'sm'
         }
     });
 

@@ -1,12 +1,11 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 import BreadCrumb from '@/Components/BreadCrumb.vue';
 import NoData from '@/Components/NoData.vue';
 import Pagination from '@/Components/Pagination.vue';
 import Search from '@/Components/Search.vue';
 import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
-import DangerButton from '@/Components/Buttons/DangerButton.vue';
 import SuccessButton from '@/Components/Buttons/SuccessButton.vue';
 
 defineOptions({ layout: MainLayout })
@@ -19,6 +18,10 @@ defineProps({
         type: Object || null
     }
 });
+
+const deleteHandler = (id) => {
+    router.delete(route('banner.delete', id), {preserveState: true});
+}
 
 </script>
 
@@ -37,7 +40,7 @@ defineProps({
                         <div class="row g-4 mb-3">
                             <div class="col-sm-auto">
                                 <div>
-                                    <SuccessButton :type="false" :href="route('banner.create')">
+                                    <SuccessButton size="md" :type_button="false" :href="route('banner.create')">
                                         <i class="ri-add-line align-bottom me-1"></i> Create
                                     </SuccessButton>
                                 </div>
@@ -64,16 +67,19 @@ defineProps({
                                         <td class="customer_name">{{ item.image }}</td>
                                         <td class="date">{{ item.created_at }}</td>
                                         <td>
-                                            <div class="d-flex gap-2">
+                                            <div class="d-flex gap-2 align-items-center">
                                                 <div class="edit">
-                                                    <PrimaryButton :type="false" :href="route('banner.edit', item.id)">
+                                                    <PrimaryButton :type_button="false" :href="route('banner.edit', item.id)">
                                                         Edit
                                                     </PrimaryButton>
                                                 </div>
                                                 <div class="remove">
-                                                    <DangerButton>
-                                                        Delete
-                                                    </DangerButton>
+                                                    <w-confirm
+                                                        style="background-color: red;padding: 3px 3px; border-radius: 5px;"
+                                                        :tooltip="{ label: 'Delete this?', bgColor: 'error', top: true, transition: 'twist' }"
+                                                        @confirm="deleteHandler(item.id)">
+                                                            Delete
+                                                    </w-confirm>
                                                 </div>
                                             </div>
                                         </td>
