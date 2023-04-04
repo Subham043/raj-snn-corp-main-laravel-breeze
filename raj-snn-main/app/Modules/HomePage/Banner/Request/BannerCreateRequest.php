@@ -5,7 +5,7 @@ namespace App\Modules\HomePage\Banner\Request;
 use App\Modules\HomePage\Banner\Model\HomeBanner;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
+use Stevebauman\Purify\Facades\Purify;
 
 class BannerCreateRequest extends FormRequest
 {
@@ -44,7 +44,7 @@ class BannerCreateRequest extends FormRequest
      */
     public function store(): void
     {
-        $validated = $this->only('title', 'sub_title');
+        $validated = Purify::clean($this->only('title', 'sub_title'));
         if($this->hasFile('image') && $this->file('image')->isValid()){
             $image = $this->file('image');
             $image_name = $image->hashName();

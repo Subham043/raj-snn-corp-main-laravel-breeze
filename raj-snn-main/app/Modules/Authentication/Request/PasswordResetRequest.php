@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Stevebauman\Purify\Facades\Purify;
 
 class PasswordResetRequest extends FormRequest
 {
@@ -42,7 +43,7 @@ class PasswordResetRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
         $status = Password::sendResetLink(
-            $this->only('email')
+            Purify::clean($this->only('email'))
         );
 
         if (!$status == Password::RESET_LINK_SENT) {

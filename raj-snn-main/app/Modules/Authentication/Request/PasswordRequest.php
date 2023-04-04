@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
+use Stevebauman\Purify\Facades\Purify;
 
 class PasswordRequest extends FormRequest
 {
@@ -37,7 +38,7 @@ class PasswordRequest extends FormRequest
      */
     public function updateAuthPassword(): void
     {
-        $validated = $this->only('password');
+        $validated = Purify::clean($this->only('password'));
         $this->user()->update([
             'password' => Hash::make($validated['password']),
         ]);

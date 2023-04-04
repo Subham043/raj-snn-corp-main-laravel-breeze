@@ -11,6 +11,8 @@
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "spatie/laravel-query-builder": "^5.2",
+        "stevebauman/purify": "^6.0",
         "tightenco/ziggy": "^1.0",
         "webpatser/laravel-uuid": "^4.0"
     },

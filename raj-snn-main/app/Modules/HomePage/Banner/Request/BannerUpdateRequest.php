@@ -3,10 +3,9 @@
 namespace App\Modules\HomePage\Banner\Request;
 
 use App\Modules\HomePage\Banner\Model\HomeBanner;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
+use Stevebauman\Purify\Facades\Purify;
 
 class BannerUpdateRequest extends FormRequest
 {
@@ -45,7 +44,7 @@ class BannerUpdateRequest extends FormRequest
      */
     public function update(HomeBanner $data): void
     {
-        $validated = $this->only('title', 'sub_title');
+        $validated = Purify::clean($this->only('title', 'sub_title'));
         if($this->hasFile('image') && $this->file('image')->isValid()){
             if(file_exists(storage_path('app/public/'.$this->homeBannerModel->image_path.'/'.$data->image))){
                 unlink(storage_path('app/public/'.$this->homeBannerModel->image_path.'/'.$data->image));
