@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\Filters\Filter;
+use Illuminate\Database\Eloquent\Builder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class BannerController extends Controller
 {
@@ -63,7 +66,9 @@ class BannerController extends Controller
     public function list(Request $request): Response
     {
         $banners = QueryBuilder::for(HomeBanner::class)
-                    ->allowedFilters('title')
+                    ->allowedFilters([
+                        AllowedFilter::custom('search', new CommonFilter),
+                    ])
                     ->get();
         return Inertia::render('HomePage/Banner/List', [
             'banners' => BannerCollection::collection($banners),
@@ -71,4 +76,14 @@ class BannerController extends Controller
         ]);
     }
 
+}
+
+
+class CommonFilter implements Filter
+{
+    public function __invoke(Builder $query, $value, string $property)
+    {
+        $query->where('title', 'LIKE', '%' . $value . '%')
+        ->orWhere('sub_title', 'LIKE', '%' . $value . '%');
+    }
 }

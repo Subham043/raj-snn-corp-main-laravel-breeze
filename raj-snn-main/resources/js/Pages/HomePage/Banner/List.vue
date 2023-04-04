@@ -40,7 +40,7 @@ defineProps({
                                 </div>
                             </div>
                             <div class="col-sm">
-                                <Search :link="route('banner.list')" :filter="filters?.filter?.title" />
+                                <Search :link="route('banner.list')" :filter="filters?.filter?.search" />
                             </div>
                         </div>
                         <div v-if="banners.data.length>0" class="table-responsive table-card mt-3 mb-1">

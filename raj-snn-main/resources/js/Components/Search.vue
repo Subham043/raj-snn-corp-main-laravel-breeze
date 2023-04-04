@@ -17,7 +17,7 @@ const props = defineProps({
 const search = ref(props?.filter);
 
 watch(search, debounce(function (value) {
-    router.get(props.link, {'filter[title]': value}, {preserveState: true, replace: true});
+    router.get(props.link, {'filter[search]': value}, {preserveState: true, replace: true});
 }, 300))
 
 </script>
