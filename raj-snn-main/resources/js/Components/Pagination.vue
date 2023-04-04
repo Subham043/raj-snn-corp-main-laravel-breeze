@@ -1,15 +1,31 @@
+<script setup>
+import { Link } from '@inertiajs/vue3';
+
+
+const props = defineProps({
+    pagination: {
+        type: Array,
+        default: []
+    },
+});
+
+</script>
+
 <template>
-   <div class="d-flex justify-content-end">
+   <div class="d-flex justify-content-end" v-if="pagination.length > 3">
         <div class="pagination-wrap hstack gap-2">
-            <a class="page-item pagination-prev" href="">
-                Previous
-            </a>
             <ul class="pagination listjs-pagination mb-0">
-                <li class=" "><a class="page" href="">1</a></li>
+                <li v-for="(item, index) in pagination" :key="index" :class="`page-item ${item.active ? 'active' : ''}`">
+                    <Link v-if="item.url" class="page" :href="item.url" v-html="item.label"/>
+                    <span v-else v-html="item.label" :class="`page ${item.url ? '' : 'disabled'}`" />
+                </li>
             </ul>
-            <a class="page-item pagination-next" href="">
-                Next
-            </a>
         </div>
     </div>
 </template>
+
+<style scoped>
+.disabled{
+    background-color: #eee !important;
+}
+</style>

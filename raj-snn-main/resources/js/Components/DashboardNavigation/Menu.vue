@@ -19,7 +19,7 @@
                     <div id="two-column-menu"></div>
                     <ul class="navbar-nav" id="navbar-nav">
                         <li class="menu-title"><span data-key="t-menu">Menu</span></li>
-                        <MenuLink :href="route('profile.edit')" name="Enquiries" icon="ri-message-fill" />
+                        <MenuLink :href="route('banner.list')" name="Banner" icon="ri-message-fill" />
                         <MenuLink :href="route('profile.edit')" name="Projects" icon="ri-building-fill" />
                     </ul>
                 </div>

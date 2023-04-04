@@ -5,6 +5,9 @@ import BreadCrumb from '@/Components/BreadCrumb.vue';
 import NoData from '@/Components/NoData.vue';
 import Pagination from '@/Components/Pagination.vue';
 import Search from '@/Components/Search.vue';
+import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
+import DangerButton from '@/Components/Buttons/DangerButton.vue';
+import SuccessButton from '@/Components/Buttons/SuccessButton.vue';
 
 defineOptions({ layout: MainLayout })
 
@@ -34,13 +37,13 @@ defineProps({
                         <div class="row g-4 mb-3">
                             <div class="col-sm-auto">
                                 <div>
-                                    <Link :href="route('banner.create')" style="background:green;border-color:green;"
-                                        type="button" class="btn btn-success add-btn" id="create-btn"><i
-                                            class="ri-add-line align-bottom me-1"></i> Create</Link>
+                                    <SuccessButton :type="false" :href="route('banner.create')">
+                                        <i class="ri-add-line align-bottom me-1"></i> Create
+                                    </SuccessButton>
                                 </div>
                             </div>
                             <div class="col-sm">
-                                <Search :link="route('banner.list')" :filter="filters?.filter?.search" />
+                                <Search v-if="banners.data.length>0" :link="route('banner.list')" :filter="filters?.filter?.search" />
                             </div>
                         </div>
                         <div v-if="banners.data.length>0" class="table-responsive table-card mt-3 mb-1">
@@ -63,13 +66,14 @@ defineProps({
                                         <td>
                                             <div class="d-flex gap-2">
                                                 <div class="edit">
-                                                    <Link :href="route('banner.edit', item.id)"
-                                                        style="background:yellow;color:black;border-color:yellow;"
-                                                        class="btn btn-sm btn-success edit-item-btn">Edit</Link>
+                                                    <PrimaryButton :type="false" :href="route('banner.edit', item.id)">
+                                                        Edit
+                                                    </PrimaryButton>
                                                 </div>
                                                 <div class="remove">
-                                                    <button class="btn btn-sm btn-danger remove-item-btn"
-                                                        style="background:red">Delete</button>
+                                                    <DangerButton>
+                                                        Delete
+                                                    </DangerButton>
                                                 </div>
                                             </div>
                                         </td>
@@ -80,7 +84,7 @@ defineProps({
                         </div>
                         <NoData v-else />
 
-                    <Pagination />
+                    <Pagination :pagination="banners?.meta?.links" />
                 </div>
             </div><!-- end card -->
         </div>

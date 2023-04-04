@@ -69,7 +69,7 @@ class BannerController extends Controller
                     ->allowedFilters([
                         AllowedFilter::custom('search', new CommonFilter),
                     ])
-                    ->get();
+                    ->paginate(10);
         return Inertia::render('HomePage/Banner/List', [
             'banners' => BannerCollection::collection($banners),
             'filters' => $request->only('filter')
